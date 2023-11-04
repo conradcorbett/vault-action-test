@@ -12,12 +12,12 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Troubleshooting
-      run: |
-          curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
-          jq "{ jwt: .value, role: \"$VAULT_ROLE\" }" > ./token.json
+        run: |
+            curl -sSL -H "Authorization: bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "$ACTIONS_ID_TOKEN_REQUEST_URL" | \
+            jq "{ jwt: .value, role: \"$VAULT_ROLE\" }" > ./token.json
             
-          echo 'GitHub Actions Token Claims'
-          cat ./token.json
+            echo 'GitHub Actions Token Claims'
+            cat ./token.json
       - name: Import Secrets
         uses: hashicorp/vault-action@v2
         with:
